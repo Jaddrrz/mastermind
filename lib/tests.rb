@@ -11,6 +11,11 @@
 # test3.test = "newname"
 # puts test3.test
 
-test = Array.new(4, Array.new)
+def my_function
+  my_variable = "Hello, world!"
+  return my_variable
+end
 
-p test
+# You can call the function like this:
+result = my_function
+puts result  # Outputs: Hello, world!

@@ -1,7 +1,8 @@
 require "./player"
 require "./code.rb"
+ 
 
-def start_game
+def start_game()
   puts "Hello, you are playing Mastermind. What's your name?"
   player1_name = gets.chomp.capitalize.to_s
   
@@ -13,12 +14,16 @@ def start_game
     player1_role = gets.chomp.capitalize.to_s
   end
   
-  puts "#{player1_role}?, good choice"
+  puts "#{player1_role}? Good choice"
   
-  player_one = Player.new(player1_name, player1_role)
-  puts player_one.name
-  puts player_one.role
+  player_one = (Player.new(player1_name, player1_role))
+  return player_one
 end
+
+
+player_one = start_game
+
+puts player_one.name
 
 secret_code = Code.create_secret_code()
 puts "The secret code has been created, try to win within 4 guesses! Only rainbow colors are used"
