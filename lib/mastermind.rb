@@ -25,14 +25,17 @@ player_one = start_game
 
 puts player_one.name
 
-secret_code = Code.create_secret_code()
+#secret_code = Code.create_secret_code()
+secret_code = ["Red", "Red", "Blue", "Red"]
+p secret_code
 puts "The secret code has been created, try to win within 4 guesses! Only rainbow colors are used"
 
 guesses = Array.new(4, Array.new)
 
 Code.guess_code(1, guesses)
 
-p guesses[0]
+Code.feedback_code(1, guesses, secret_code)
+
 
 # Make secret code
 #   Call PLayer class, get their name and what role they want to play

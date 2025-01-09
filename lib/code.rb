@@ -1,7 +1,7 @@
 class Code 
   attr_accessor :one, :two, :three, :four, :guess
 
-  @@colors = ["red", "orange", "yellow", "green", "blue", "purple"]
+  @@colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
   @@secret_code = []
 
   def initialize(one, two, three, four)
@@ -27,7 +27,23 @@ class Code
     guesses[attempt.to_i - 1] = guess
   end
 
-  def feedback_code
+  def self.feedback_code(attempt, guesses, secret_code)
+   
+    counter1 = 0
+    counter2 = 0
     
+    guesses[attempt.to_i - 1].each_with_index do |color, index1|
+      secret_code.each_with_index do |secret_color, index2|
+        if (color == secret_color) && (index1 == index2) # Check which colors are on same positions, that is indexes
+          counter1 += 1
+        elsif (color == secret_color) && (index1 != index2) # Check the ones that are not on same position
+          counter2 += 1
+        # elsif (color == secret_color) && (index1 != index2) && (secret_code.count(color) > 1)
+        #   counter2 -= 1
+        end
+      end
+    end
+    
+    puts "Feedback: #{counter1} on the right spot, #{counter2} on the wrong spot"
   end
 end
