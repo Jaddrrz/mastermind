@@ -11,11 +11,14 @@
 # test3.test = "newname"
 # puts test3.test
 
-def my_function
-  my_variable = "Hello, world!"
-  return my_variable
-end
+# def my_function
+#   my_variable = "Hello, world!"
+#   return my_variable
+# end
 
-# You can call the function like this:
-result = my_function
-puts result  # Outputs: Hello, world!
+# # You can call the function like this:
+# result = my_function
+# puts result  # Outputs: Hello, world!
+
+array = ["red", "blue", "red", "red"]
+puts array.count("red")
