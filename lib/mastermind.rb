@@ -25,8 +25,7 @@ player_one = start_game
 
 puts player_one.name
 
-#secret_code = Code.create_secret_code()
-secret_code = ["Yellow", "Red", "Blue", "Red"]
+secret_code = Code.create_secret_code()
 p secret_code
 puts "\nThe secret code has been created, try to win within 4 guesses! Only rainbow colors are used!"
 
