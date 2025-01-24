@@ -21,4 +21,5 @@
 # puts result  # Outputs: Hello, world!
 
 array = ["red", "blue", "red", "red"]
-puts array.count("red")
+something = array.tally
+p something.value?(2)

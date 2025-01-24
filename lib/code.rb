@@ -31,7 +31,7 @@ class Code
    
     counter1 = 0
     counter2 = 0
-    counter3 = 0
+  
     wrong_spot = false
     
     guesses[attempt.to_i - 1].each_with_index do |color, index1|
@@ -40,6 +40,7 @@ class Code
       secret_code.each_with_index do |secret_color, index2|
         if (color == secret_color) && (index1 == index2) # Check which colors are on same positions, that is indexes
           counter1 += 1
+          wrong_spot = true
         elsif (color == secret_color) && (index1 != index2) && (wrong_spot == false) # Check the ones that are not on same position
           counter2 += 1               
           wrong_spot = true
@@ -47,12 +48,15 @@ class Code
       end
     end
 
-    if counter2 > 3
-      counter3 = counter2 - counter1
-    else
-      counter3 = counter2
-    end
+    # repetitions = guesses.tally
+    # if repetitions.value?(2)
+    #   counter2 -= 1
+    # elsif repetitions.value?(3)
+    #   counter2 -= 2
+    # elsif repetitions.value?(4)
+    #   counter2 -=3
+    # end
   
-    puts "Feedback: #{counter1} on the right spot, #{counter3} on the wrong spot"
+    puts "Feedback: #{counter1} on the right spot, #{counter2} on the wrong spot"
   end
 end
