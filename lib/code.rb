@@ -31,22 +31,51 @@ class Code
    
     counter1 = 0
     counter2 = 0
+    test_array = Array.new(4)
   
-    wrong_spot = false
+    used = false
     
+    # guesses[attempt.to_i - 1].each_with_index do |color, index1|
+    #   wrong_spot = false # Reset the wrong_spot variable for every iteration
+
+    #   secret_code.each_with_index do |secret_color, index2|
+    #     if (color == secret_color) && (index1 == index2) # Check which colors are on same positions, that is indexes
+    #       counter1 += 1
+    #       wrong_spot = true
+    #       test_array[index1] = "X"
+    #       p test_array
+    #     elsif (color == secret_color) && (index1 != index2) && (wrong_spot == false) & (test_array[1] != "X") # Check the ones that are not on same position
+    #       counter2 += 1               
+    #       wrong_spot = true
+    #     end
+    #   end
+    # end
+
     guesses[attempt.to_i - 1].each_with_index do |color, index1|
-      wrong_spot = false # Reset the wrong_spot variable for every iteration
+       # Reset the wrong_spot variable for every iteration
 
       secret_code.each_with_index do |secret_color, index2|
         if (color == secret_color) && (index1 == index2) # Check which colors are on same positions, that is indexes
           counter1 += 1
-          wrong_spot = true
-        elsif (color == secret_color) && (index1 != index2) && (wrong_spot == false) # Check the ones that are not on same position
-          counter2 += 1               
-          wrong_spot = true
+       
+          test_array[index2] = "X"
+          p test_array
         end
       end
     end
+
+    guesses[attempt.to_i - 1].each_with_index do |color, index1|
+      used = false # Reset the wrong_spot variable for every iteration
+
+      secret_code.each_with_index do |secret_color, index2|
+        if (color == secret_color) && (index1 != index2) && (test_array[index2] != "X") && (used == false) # Check the ones that are not on same position
+          p "hey"
+          counter2 += 1               
+          used == true
+        end
+      end
+    end
+    
 
     # repetitions = guesses.tally
     # if repetitions.value?(2)
