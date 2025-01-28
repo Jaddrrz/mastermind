@@ -25,7 +25,8 @@ require "./code.rb"
 
 #   
 
-secret_code = Code.create_secret_code()
+# secret_code = Code.create_secret_code()
+secret_code = ["Red", "Yellow", "Yellow", "Yellow"]
 p secret_code
 puts "\nThe secret code has been created, try to win within 4 guesses! Only rainbow colors are used!"
 

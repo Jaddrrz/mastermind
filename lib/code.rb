@@ -51,10 +51,8 @@ class Code
     #   end
     # end
 
-    guesses[attempt.to_i - 1].each_with_index do |color, index1|
-       # Reset the wrong_spot variable for every iteration
-
-      secret_code.each_with_index do |secret_color, index2|
+    secret_code.each_with_index do |secret_color, index1|
+      guesses[attempt.to_i - 1].each_with_index do |color, index2|
         if (color == secret_color) && (index1 == index2) # Check which colors are on same positions, that is indexes
           counter1 += 1
        
@@ -64,14 +62,14 @@ class Code
       end
     end
 
-    guesses[attempt.to_i - 1].each_with_index do |color, index1|
-      used = false # Reset the wrong_spot variable for every iteration
+    secret_code.each_with_index do |secret_color, index1|
+      used = false # Reset used variable for every iteration
 
-      secret_code.each_with_index do |secret_color, index2|
-        if (color == secret_color) && (index1 != index2) && (test_array[index2] != "X") && (used == false) # Check the ones that are not on same position
-          p "hey"
+      guesses[attempt.to_i - 1].each_with_index do |color, index2|
+        next if (test_array[index1] == "X")
+        if (color == secret_color) && (index1 != index2) && (used == false) # Check the ones that are not on same position
           counter2 += 1               
-          used == true
+          used = true
         end
       end
     end
