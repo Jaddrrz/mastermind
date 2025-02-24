@@ -1,6 +1,7 @@
 require "./player"
 require "./code"
 
+
 def start_game()
   puts "Hello, you are playing Mastermind. What's your name?"
   player1_name = gets.chomp.capitalize.to_s
@@ -19,7 +20,10 @@ def start_game()
   return player_one
 end
 
-game1 = Code.new("player_guesses")
+
+player = start_game
+
+game1 = Code.new(player.role)
 secret_code = game1.secret_code
 
 p secret_code

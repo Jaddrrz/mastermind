@@ -4,10 +4,10 @@ class Code
   @@colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
 
   def initialize(mode)
-    if mode == "player_guesses"
+    if mode == "Guesser"
       @secret_code = [@@colors.sample, @@colors.sample, @@colors.sample, @@colors.sample]
       @guesses = Array.new(4, Array.new)
-    elsif mode == "player_creates"
+    elsif mode == "Creator"
       puts "Create your secret_code! \nFirst color:"
       first = gets.chomp.capitalize.to_s 
       puts "Second color:"
