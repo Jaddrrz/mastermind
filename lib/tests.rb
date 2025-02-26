@@ -20,6 +20,7 @@
 # result = my_function
 # puts result  # Outputs: Hello, world!
 
-array = ["red", "blue", "red", "red"]
-something = array.tally
-p something.value?(2)
+array1 = ["red"]
+array2 = ["red"]
+p array2 - array1
+

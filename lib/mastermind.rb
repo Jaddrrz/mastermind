@@ -51,5 +51,5 @@ player = start_game()
 
 game = Code.new(player.role)
 
-guess_round(game)
+# guess_round(game)
 

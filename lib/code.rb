@@ -8,16 +8,27 @@ class Code
       @secret_code = [@@colors.sample, @@colors.sample, @@colors.sample, @@colors.sample]
       @guesses = Array.new(4, Array.new)
     elsif mode == "Creator"
-      puts "Create your secret_code! \nFirst color:"
-      first = gets.chomp.capitalize.to_s 
-      puts "Second color:"
-      second = gets.chomp.capitalize.to_s 
-      puts "Third color:"
-      third = gets.chomp.capitalize.to_s 
-      puts "Fourth color:"
-      fourth = gets.chomp.capitalize.to_s 
-    
-      @secret_code = [first, second, third, fourth]
+      puts "Create your secret_code! Example: Orange Red Yellow Purple"
+      # first = gets.chomp.capitalize.to_s 
+      # puts "Second color:"
+      # second = gets.chomp.capitalize.to_s 
+      # puts "Third color:"
+      # third = gets.chomp.capitalize.to_s 
+      # puts "Fourth color:"
+      # fourth = gets.chomp.capitalize.to_s 
+      
+      input = gets.chomp.split(" ").map(&:capitalize).to_s
+      p (input & @@colors)
+      if (input & @@colors).empty?
+        puts "Type again"
+         input = gets.chomp.split(" ").map(&:capitalize).to_s
+      end
+      # while [input - @@colors].empty? == false
+      #   puts "Type again"
+      #   input = gets.chomp.split(" ").map(&:capitalize).to_s
+      # end
+      
+      # @secret_code = [first, second, third, fourth]
     end
   end
   
@@ -57,6 +68,22 @@ class Code
     secret_code.each_with_index do |secret_color, index1|
       next if used_indices_secret.include?(index1) # Skip already checked indices
 
+
+# Make secret code
+#   Call PLayer class, get their name and what role they want to play
+#   Call Code class, create the secret code, or asssign the player's secret one
+#
+# Make guess attempt
+#   Use guess_code function within the Code class to either take the input of player or create a random one from the computer 
+# 
+# Make feedback
+#   Use feedback_code function that puts "Player (or computer) has put X pegs"
+# 
+# Check if guess is right
+# 
+# Repeat
+# 
+# Announce winner
       guesses[attempt.to_i - 1].each_with_index do |color, index2|
         if (color == secret_color) && (index1 != index2) && (!used_indices_guess.include?(index2))
           counter2 += 1
