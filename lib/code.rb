@@ -3,7 +3,7 @@ class Code
 
   @@colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
 
-  def initialize(mode)
+  def initialize(mode) # Generate or create code based on mode
     if mode == "Guesser"
       @secret_code = [@@colors.sample, @@colors.sample, @@colors.sample, @@colors.sample]
       @guesses = Array.new(4, Array.new)
@@ -70,7 +70,7 @@ class Code
     puts "\nFeedback: #{counter1} on the right spot, #{counter2} on the wrong spot"
   end
 
-  def self.guessed_right?(guess_counter, guesses, secret_code)
+  def self.guessed_right?(guess_counter, guesses, secret_code) # Determine if player has won
     if guesses[guess_counter - 1] == secret_code
       true
     else 

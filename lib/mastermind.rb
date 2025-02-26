@@ -25,7 +25,7 @@ def guess_round(game)
   guesses = []
   secret_code = game.secret_code
   p secret_code
-  puts "\nThe secret code has been created, try to win within 4 guesses! Only rainbow colors are used! (Red, Orange, Yellow, Green, Blue, Purple)"
+  puts "\nThe secret code has been created, try to win within 7 guesses! Only rainbow colors are used! (Red, Orange, Yellow, Green, Blue, Purple)"
   
   7.times do 
     if guess_counter < 7
@@ -53,20 +53,3 @@ game = Code.new(player.role)
 
 guess_round(game)
 
-
-
-# Make secret code
-#   Call PLayer class, get their name and what role they want to play
-#   Call Code class, create the secret code, or asssign the player's secret one
-#
-# Make guess attempt
-#   Use guess_code function within the Code class to either take the input of player or create a random one from the computer 
-# 
-# Make feedback
-#   Use feedback_code function that puts "Player (or computer) has put X pegs"
-# 
-# Check if guess is right
-# 
-# Repeat
-# 
-# Announce winner
