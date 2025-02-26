@@ -20,20 +20,39 @@ def start_game()
   return player_one
 end
 
+def guess_round(game)
+  guess_counter = 1
+  guesses = []
+  secret_code = game.secret_code
+  p secret_code
+  puts "\nThe secret code has been created, try to win within 4 guesses! Only rainbow colors are used! (Red, Orange, Yellow, Green, Blue, Purple)"
+  
+  7.times do 
+    if guess_counter < 7
+      puts "\nAttempt number #{guess_counter}"
+    else 
+      puts "\nLast attempt"
+    end  
+    Code.guess_code(guess_counter, guesses)
+    Code.feedback_code(guess_counter, guesses, secret_code)
+    if Code.guessed_right?(guess_counter, guesses, secret_code)
+      puts "You won!"
+      break
+    end
+    guess_counter += 1
+    if guess_counter == 8
+      puts "\nYou're out of attempts, better luck next time!"
+    end
+  end
+end
 
-player = start_game
 
-game1 = Code.new(player.role)
-secret_code = game1.secret_code
+player = start_game()
 
-p secret_code
-puts "\nThe secret code has been created, try to win within 4 guesses! Only rainbow colors are used! (Red, Orange, Yellow, Green, Blue, Purple)"
+game = Code.new(player.role)
 
-guesses = Array.new(4, Array.new)
+guess_round(game)
 
-Code.guess_code(1, guesses)
-
-Code.feedback_code(1, guesses, secret_code)
 
 
 # Make secret code
