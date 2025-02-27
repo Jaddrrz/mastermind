@@ -20,7 +20,7 @@
 # result = my_function
 # puts result  # Outputs: Hello, world!
 
-array1 = ["red"]
-array2 = ["red"]
-p array2 - array1
+array1 = ["red", "blue"]
+array2 = ["red", "green"]
+p array2 & array1
 

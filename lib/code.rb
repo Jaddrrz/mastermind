@@ -1,50 +1,62 @@
 class Code 
   attr_accessor :guesses, :secret_code
 
-  @@colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
+  COLORS = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
 
   def initialize(mode) # Generate or create code based on mode
     if mode == "Guesser"
       @secret_code = [@@colors.sample, @@colors.sample, @@colors.sample, @@colors.sample]
       @guesses = Array.new(4, Array.new)
     elsif mode == "Creator"
-      puts "Create your secret_code! Example: Orange Red Yellow Purple"
-      # first = gets.chomp.capitalize.to_s 
-      # puts "Second color:"
-      # second = gets.chomp.capitalize.to_s 
-      # puts "Third color:"
-      # third = gets.chomp.capitalize.to_s 
-      # puts "Fourth color:"
-      # fourth = gets.chomp.capitalize.to_s 
       
-      input = gets.chomp.split(" ").map(&:capitalize).to_s
-      p (input & @@colors)
-      if (input & @@colors).empty?
-        puts "Type again"
-         input = gets.chomp.split(" ").map(&:capitalize).to_s
-      end
-      # while [input - @@colors].empty? == false
-      #   puts "Type again"
-      #   input = gets.chomp.split(" ").map(&:capitalize).to_s
+      # input = gets.chomp.split(" ").map(&:capitalize)
+      
+      # while 
+      # for color in input do # Ask again for input if not accepted
+      #   if COLORS.include?(color) == false
+      #     puts "Type again"
+      #     input = gets.chomp.split(" ").map(&:capitalize).to_s
+      #   end
       # end
       
-      # @secret_code = [first, second, third, fourth]
+      @secret_code = Code.get_code
+      puts "Your secret code is [#{@secret_code.join(' - ')}]"
     end
   end
   
-
-  def self.guess_code(attempt, guesses)
+  def self.get_code()
     puts "First color:"
-    first = gets.chomp.capitalize.to_s 
+    first = gets.chomp.capitalize.to_s
+    while COLORS.include?(first) == false
+      puts "Type again"
+      first = gets.chomp.capitalize.to_s 
+      p first
+    end
     puts "Second color:"
     second = gets.chomp.capitalize.to_s 
+    while COLORS.include?(second) == false
+      puts "Type again"
+      second = gets.chomp.capitalize.to_s 
+    end
     puts "Third color:"
     third = gets.chomp.capitalize.to_s 
+    while COLORS.include?(third) == false
+      puts "Type again"
+      third = gets.chomp.capitalize.to_s 
+    end
     puts "Fourth color:"
     fourth = gets.chomp.capitalize.to_s 
-    
-    guess = [first, second, third, fourth]
-    puts "You have guessed #{guess}"
+    while COLORS.include?(fourth) == false
+      puts "Type again"
+      fourth = gets.chomp.capitalize.to_s 
+    end
+    code = [first, second, third, fourth]
+    code
+  end
+
+  def self.guess_code(attempt, guesses)  
+    guess = Code.get_code()
+    puts "You have guessed [#{guess.join(' - ')}]"
     guesses << guess
   end
 
