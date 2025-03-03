@@ -81,7 +81,7 @@ def computer_guesses(game)
     
     guess_counter += 1
     if guess_counter == 8
-      puts "\nYou're out of attempts, better luck next time!"
+      puts "\nThe computer is out of attempts, you won!"
     end
   end
 end
