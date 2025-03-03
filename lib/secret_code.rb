@@ -1,27 +1,19 @@
-class Code 
+class SecretCode 
   attr_accessor :guesses, :secret_code
 
   COLORS = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
 
-  def initialize(mode) # Generate or create code based on mode
-    if mode == "Guesser"
-      @secret_code = [@@colors.sample, @@colors.sample, @@colors.sample, @@colors.sample]
+  def initialize(player) # Generate or create code based on mode
+    if player.role == "Guesser"
+      @secret_code = [COLORS.sample, COLORS.sample, COLORS.sample, COLORS.sample]
       @guesses = Array.new(4, Array.new)
-    elsif mode == "Creator"
-      
-      # input = gets.chomp.split(" ").map(&:capitalize)
-      
-      # while 
-      # for color in input do # Ask again for input if not accepted
-      #   if COLORS.include?(color) == false
-      #     puts "Type again"
-      #     input = gets.chomp.split(" ").map(&:capitalize).to_s
-      #   end
-      # end
-      
-      @secret_code = Code.get_code
-      puts "Your secret code is [#{@secret_code.join(' - ')}]"
+      guesser = player.name
+    elsif player.role == "Creator"
+      @secret_code = SecretCode.get_code
+      puts "\nYour secret code is [#{@secret_code.join(' - ')}]"
+      guesser = "the computer"
     end
+    puts "\nThe games is set, #{guesser} will be guessing."
   end
   
   def self.get_code()
@@ -54,12 +46,6 @@ class Code
     code
   end
 
-  def self.guess_code(attempt, guesses)  
-    guess = Code.get_code()
-    puts "You have guessed [#{guess.join(' - ')}]"
-    guesses << guess
-  end
-
   def self.feedback_code(attempt, guesses, secret_code)
     counter1 = 0
     counter2 = 0
@@ -80,22 +66,6 @@ class Code
     secret_code.each_with_index do |secret_color, index1|
       next if used_indices_secret.include?(index1) # Skip already checked indices
 
-
-# Make secret code
-#   Call PLayer class, get their name and what role they want to play
-#   Call Code class, create the secret code, or asssign the player's secret one
-#
-# Make guess attempt
-#   Use guess_code function within the Code class to either take the input of player or create a random one from the computer 
-# 
-# Make feedback
-#   Use feedback_code function that puts "Player (or computer) has put X pegs"
-# 
-# Check if guess is right
-# 
-# Repeat
-# 
-# Announce winner
       guesses[attempt.to_i - 1].each_with_index do |color, index2|
         if (color == secret_color) && (index1 != index2) && (!used_indices_guess.include?(index2))
           counter2 += 1
@@ -107,6 +77,10 @@ class Code
     end
 
     puts "\nFeedback: #{counter1} on the right spot, #{counter2} on the wrong spot"
+    right = counter1
+    wrong = counter2
+    feedback = [right, wrong]
+    feedback
   end
 
   def self.guessed_right?(guess_counter, guesses, secret_code) # Determine if player has won
