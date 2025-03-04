@@ -22,7 +22,6 @@ class SecretCode
     while COLORS.include?(first) == false
       puts "Type again"
       first = gets.chomp.capitalize.to_s 
-      p first
     end
     puts "Second color:"
     second = gets.chomp.capitalize.to_s 

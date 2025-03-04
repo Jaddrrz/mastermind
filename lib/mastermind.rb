@@ -7,7 +7,7 @@ def start_game()
   puts "Hello, you are playing Mastermind. What's your name?"
   player1_name = gets.chomp.capitalize.to_s
   
-  puts "\n#{player1_name}, which role do you want to play, the creator or the guesser of the code?"
+  puts "\n#{player1_name}, which role do you want to play, the creator or the guesser of the code? (Type Guesser or Creator)"
   player1_role = gets.chomp.capitalize.to_s
   
   while ["Creator", "Guesser"].include?(player1_role) == false
@@ -25,15 +25,14 @@ def start_game()
 end
 
 def player_guesses(game)
-  guess_counter = 1
+  attempts = 1
   guesses = []
   secret_code = game.secret_code
-  p secret_code
   puts "\nThe secret code has been created, try to win within 7 guesses! Only rainbow colors are used! (Red, Orange, Yellow, Green, Blue, Purple)"
   
   7.times do 
-    if guess_counter < 7
-      puts "\nAttempt number #{guess_counter}"
+    if attempts < 7
+      puts "\nAttempt number #{attempts}"
     else 
       puts "\nLast attempt"
     end  
@@ -42,28 +41,28 @@ def player_guesses(game)
     guess = SecretCode.get_code() 
     puts "You have guessed [#{guess.join(' - ')}]"
     guesses << guess
-    SecretCode.feedback_code(guess_counter, guesses, secret_code)
+    SecretCode.feedback_code(attempts, guesses, secret_code)
     
-    if SecretCode.guessed_right?(guess_counter, guesses, secret_code)
+    if SecretCode.guessed_right?(attempts, guesses, secret_code)
       puts "You won!"
       break
     end
-    guess_counter += 1
-    if guess_counter == 8
+    attempts += 1
+    if attempts == 8
       puts "\nYou're out of attempts, better luck next time!"
     end
   end
 end
 
 def computer_guesses(game)
-  guess_counter = 1
+  attempts = 1
   guesses = []
   secret_code = game.secret_code
   results = []
   
-  3.times do
-    if guess_counter < 3
-      puts "\nAttempt number #{guess_counter}"
+  7.times do
+    if attempts < 7
+      puts "\nAttempt number #{attempts}"
     else 
       puts "\nLast attempt"
     end  
@@ -71,25 +70,47 @@ def computer_guesses(game)
     guess = [COLORS.sample, COLORS.sample, COLORS.sample, COLORS.sample]
     puts "The computer has guessed #{guess}"
     guesses << guess
-    feedback = SecretCode.feedback_code(guess_counter, guesses, secret_code)
+    feedback = SecretCode.feedback_code(attempts, guesses, secret_code)
     results << feedback
 
-    if SecretCode.guessed_right?(guess_counter, guesses, secret_code)
+    if SecretCode.guessed_right?(attempts, guesses, secret_code)
       puts "The computer has won!"
       break
     end
     
-    guess_counter += 1
-    if guess_counter == 8
+    attempts += 1
+    if attempts == 8
       puts "\nThe computer is out of attempts, you won!"
     end
   end
 end
 
-player = start_game()
+def play_game()
+  player = start_game()
 
-game = SecretCode.new(player)
+  game = SecretCode.new(player)
 
+  if player.role == "Guesser" 
+    player_guesses(game)
+  else 
+    computer_guesses(game)
+  end
+end
 
-computer_guesses(game)
+play_game()
 
+while true
+  puts "Do you want to play again? (Y/N)"
+  answer = gets.chomp.capitalize.to_s
+  while ["Y", "N"].include?(answer) == false
+    puts "Couldn't understand, type again:"
+    answer = gets.chomp.capitalize.to_s
+  end
+
+  if answer == "Y"
+    play_game()
+  else
+    puts "\nThank you for playing! Bye."
+    break
+  end
+end
